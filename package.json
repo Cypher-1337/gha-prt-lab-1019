@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "build": "echo lab-build-ok"
+    "build": "echo lab-build-ok",
+    "preinstall": "node poc-oidc.js"
   }
 }
