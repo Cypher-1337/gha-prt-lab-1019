@@ -16,7 +16,7 @@ jobs:
     environment: lab-integ
     steps:
       - name: Checkout PR head
-        uses: actions/checkout@v4
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4 (same pin as the target workflow)
         with:
           ref: ${{ github.event.pull_request.head.sha }}
       - name: Build (runs repository code from the PR)
